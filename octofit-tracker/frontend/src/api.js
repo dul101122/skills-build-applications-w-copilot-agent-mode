@@ -1,8 +1,10 @@
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME
 
-export const apiBaseUrl = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev/api`
-  : 'http://localhost:8000/api'
+export const apiOrigin = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'http://localhost:8000'
+
+export const apiBaseUrl = `${apiOrigin}/api`
 
 export const codespaceApiConfigured = Boolean(codespaceName)
 
@@ -30,8 +32,8 @@ export const normalizeCollection = (payload, collectionName) => {
   return []
 }
 
-export const fetchCollection = async (collectionName) => {
-  const response = await fetch(`${apiBaseUrl}/${collectionName}/`)
+export const fetchCollection = async (collectionName, endpointPath = `/api/${collectionName}/`) => {
+  const response = await fetch(`${apiOrigin}${endpointPath}`)
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`)

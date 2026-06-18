@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 
 import { fetchCollection } from '../api'
 
+const activitiesEndpoint = '/api/activities/'
+
 function Activities() {
   const [activities, setActivities] = useState([])
   const [status, setStatus] = useState('loading')
@@ -10,7 +12,7 @@ function Activities() {
   useEffect(() => {
     let isMounted = true
 
-    fetchCollection('activities')
+    fetchCollection('activities', activitiesEndpoint)
       .then((records) => {
         if (isMounted) {
           setActivities(records)
