@@ -32,8 +32,8 @@ export const normalizeCollection = (payload, collectionName) => {
   return []
 }
 
-export const fetchCollection = async (collectionName, endpointPath = `/api/${collectionName}/`) => {
-  const response = await fetch(`${apiOrigin}${endpointPath}`)
+export const fetchCollection = async (collectionName, endpointUrl = `${apiOrigin}/api/${collectionName}/`) => {
+  const response = await fetch(endpointUrl)
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`)
